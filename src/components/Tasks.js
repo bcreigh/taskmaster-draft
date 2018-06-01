@@ -37,7 +37,7 @@ class Tasks extends Component {
           .state
           .tasks
           .map(task => (< Task task = {
-            task.title
+            task
           } />))}
       </div>
     )
