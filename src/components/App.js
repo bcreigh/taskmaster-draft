@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {MuiThemeProvider, createMuiTheme} from '@material-ui/core/styles';
+import CssBaseline from "@material-ui/core/CssBaseline";
 import './App.css';
 import Header from './Header';
 import Tasks from './Tasks';
@@ -25,6 +26,7 @@ class App extends Component {
     return (
       <div className="App">
         <MuiThemeProvider theme={theme}>
+          <CssBaseline/>
           <Header/>
           <Tasks/>
         </MuiThemeProvider>
