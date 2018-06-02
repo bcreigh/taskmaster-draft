@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
-
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
 import Task from './Task';
 
 class Tasks extends Component {
@@ -29,10 +32,34 @@ class Tasks extends Component {
       }
     ]
   }
+
+  styles = {
+    taskHead: {
+      marginTop: '20px',
+      marginLeft: '40px'
+    },
+    fab: {
+      textAlign: 'right',
+      marginTop: '20px',
+      marginRight: '40px'
+    }
+  }
+
   render() {
     return (
       <div>
-        <h2>Task Header</h2>
+        <Grid container wrap="nowrap">
+          <Grid item xs={11}>
+            <Typography variant="headline" style={this.styles.taskHead}>
+              My Tasks
+            </Typography>
+          </Grid>
+          <Grid item xs={1} style={this.styles.fab}>
+            <Button variant="fab" mini color="primary">
+              <Icon>add</Icon>
+            </Button>
+          </Grid>
+        </Grid>
         {this
           .state
           .tasks
