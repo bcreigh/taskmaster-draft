@@ -44,19 +44,19 @@ const Task = (props) => {
           <Grid item xs={1}/>
           <Grid item xs={5}>
             <p style={styles.start}>
-              start: {moment(props.task.start).format('MM-DD-YYYY')}
+              start date: {moment(props.task.start).format('MM-DD-YYYY')}
             </p>
           </Grid>
           <Grid item xs={6}>
             {props.task.complete
               ? (
                 <p style={styles.due}>
-                  done: {moment(props.task.done).format('MM-DD-YYYY')}
+                  done date: {moment(props.task.done).format('MM-DD-YYYY')}
                 </p>
               )
               : (
                 <p style={styles.due}>
-                  due: {moment(props.task.due).format('MM-DD-YYYY')}
+                  due date: {moment(props.task.due).format('MM-DD-YYYY')}
                 </p>
               )}
 
