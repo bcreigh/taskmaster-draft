@@ -1,11 +1,22 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import moment from 'moment';
 
 const styles = {
   paper: {
     margin: '20px',
-    padding: '10px'
+    padding: '0 20px'
+  },
+  desc: {
+    marginTop: 0
+  },
+  start: {
+    marginTop: 0
+  },
+  due: {
+    marginTop: 0,
+    textAlign: 'right'
   }
 }
 
@@ -21,13 +32,19 @@ const Task = (props) => {
           <Grid item xs={1}></Grid>
           <Grid item xs={1}></Grid>
           <Grid item xs={11}>
-            <p>{props.task.description}</p>
+            <p style={styles.desc}>{props.task.description}</p>
           </Grid>
           <Grid item xs={1}/>
           <Grid item xs={5}>
-            <p>start:</p>
+            <p style={styles.start}>
+              start: {moment(props.task.start).format('MM-DD-YYYY')}
+            </p>
           </Grid>
-          <Grid item xs={6}>due:</Grid>
+          <Grid item xs={6}>
+            <p style={styles.due}>
+              due: {moment(props.task.due).format('MM-DD-YYYY')}
+            </p>
+          </Grid>
         </Grid>
       </Paper>
     </div>
