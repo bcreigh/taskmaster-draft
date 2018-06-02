@@ -4,8 +4,10 @@ import Icon from "@material-ui/core/Icon";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 
-const titleStyle = {
-  marginLeft: "10px"
+const styles = {
+  title: {
+    marginLeft: "10px"
+  }
 };
 
 const Header = () => {
@@ -16,7 +18,7 @@ const Header = () => {
           <Icon>
             assignment_turned_in
           </Icon>
-          <Typography variant="headline" color="inherit" style={titleStyle}>
+          <Typography variant="headline" color="inherit" style={styles.title}>
             TaskMaster
           </Typography>
         </Toolbar>
