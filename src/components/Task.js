@@ -1,6 +1,7 @@
 import React from 'react';
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
+import Checkbox from "@material-ui/core/Checkbox";
 import moment from 'moment';
 
 const styles = {
@@ -17,6 +18,10 @@ const styles = {
   due: {
     marginTop: 0,
     textAlign: 'right'
+  },
+  complete: {
+    textAlign: 'center',
+    marginTop: '6px'
   }
 }
 
@@ -25,7 +30,9 @@ const Task = (props) => {
     <div>
       <Paper style={styles.paper} elevation={4}>
         <Grid container>
-          <Grid item xs={1}></Grid>
+          <Grid item xs={1} style={styles.complete}>
+            <Checkbox checked={props.task.complete} color="primary"/>
+          </Grid>
           <Grid item xs={10}>
             <h3>{props.task.title}</h3>
           </Grid>
@@ -41,9 +48,18 @@ const Task = (props) => {
             </p>
           </Grid>
           <Grid item xs={6}>
-            <p style={styles.due}>
-              due: {moment(props.task.due).format('MM-DD-YYYY')}
-            </p>
+            {props.task.complete
+              ? (
+                <p style={styles.due}>
+                  done: {moment(props.task.done).format('MM-DD-YYYY')}
+                </p>
+              )
+              : (
+                <p style={styles.due}>
+                  due: {moment(props.task.due).format('MM-DD-YYYY')}
+                </p>
+              )}
+
           </Grid>
         </Grid>
       </Paper>
