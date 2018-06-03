@@ -1,15 +1,18 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import Task from './Task';
+import Dialog from "@material-ui/core/Dialog";
+import Task from "./Task";
+import EntryDialog from "./EntryDialog";
 
 class Tasks extends Component {
   constructor(props) {
     super(props);
     this.completeTask = this.completeTask.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.handleOpenDialog = this.handleOpenDialog.bind(this);
   }
   state = {
     tasks: [
@@ -20,14 +23,16 @@ class Tasks extends Component {
         due: new Date("2018-6-1"),
         done: null,
         complete: false
-      }, {
+      },
+      {
         title: "Task 2",
         description: "This is a description of task number 2",
         start: new Date("2018-5-2"),
         due: new Date("2018-6-2"),
         done: new Date("2018-5-5"),
         complete: true
-      }, {
+      },
+      {
         title: "Task 3",
         description: "This is a description of task number 3",
         start: new Date("2018-5-3"),
@@ -35,20 +40,21 @@ class Tasks extends Component {
         done: null,
         complete: false
       }
-    ]
-  }
+    ],
+    dialogOpen: false
+  };
 
   styles = {
     taskHead: {
-      marginTop: '20px',
-      marginLeft: '40px'
+      marginTop: "20px",
+      marginLeft: "40px"
     },
     fab: {
-      textAlign: 'right',
-      marginTop: '20px',
-      marginRight: '40px'
+      textAlign: "right",
+      marginTop: "20px",
+      marginRight: "40px"
     }
-  }
+  };
 
   addTask() {
     const newTask = {
@@ -63,17 +69,16 @@ class Tasks extends Component {
   }
 
   completeTask(index) {
-    let newTasks = this
-      .state
-      .tasks
-      .slice();
+    let newTasks = this.state.tasks.slice();
     let task = this.state.tasks[index];
     task.complete = !task.complete;
-    task.done = task.complete
-      ? new Date()
-      : null;
+    task.done = task.complete ? new Date() : null;
     newTasks.splice(index, 1, task);
-    this.setState({tasks: newTasks});
+    this.setState({ tasks: newTasks });
+  }
+
+  handleOpenDialog() {
+    this.setState({ dialogOpen: true });
   }
 
   render() {
@@ -86,23 +91,29 @@ class Tasks extends Component {
             </Typography>
           </Grid>
           <Grid item xs={1} style={this.styles.fab}>
-            <Button variant="fab" mini color="primary" onClick={this.addTask}>
+            <Button
+              variant="fab"
+              mini
+              color="primary"
+              onClick={this.handleOpenDialog}
+            >
               <Icon>add</Icon>
             </Button>
           </Grid>
         </Grid>
-        {this
-          .state
-          .tasks
-          .map((task, index) => (< Task 
-          key = { index }
-          id = { index }
-          task = { task }
-          completeTask = { this.completeTask } 
-          />))
-        }
+        {this.state.tasks.map((task, index) => (
+          <Task
+            key={index}
+            id={index}
+            task={task}
+            completeTask={this.completeTask}
+          />
+        ))}
+        <Dialog open={this.state.dialogOpen} disableBackdropClick={true}>
+          <EntryDialog />
+        </Dialog>
       </div>
-    )
+    );
   }
 }
 
