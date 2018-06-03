@@ -57,16 +57,17 @@ class Tasks extends Component {
     }
   };
 
-  addTask() {
+  addTask(task) {
     const newTask = {
-      title: "New task",
-      description: "Description of new task",
-      start: new Date(),
-      due: new Date(),
+      title: task.title,
+      description: task.description,
+      start: task.start,
+      due: task.due,
       done: null,
       complete: false
     };
     this.setState({ tasks: [...this.state.tasks, newTask] });
+    this.handleCloseDialog();
   }
 
   completeTask(index) {
@@ -115,7 +116,10 @@ class Tasks extends Component {
           />
         ))}
         <Dialog open={this.state.dialogOpen} disableBackdropClick={true}>
-          <EntryDialog handleClose={this.handleCloseDialog} />
+          <EntryDialog
+            handleClose={this.handleCloseDialog}
+            addTask={this.addTask}
+          />
         </Dialog>
       </div>
     );

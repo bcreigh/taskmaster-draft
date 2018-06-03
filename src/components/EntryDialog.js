@@ -9,8 +9,40 @@ import moment from "moment";
 class EntryDialog extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleDescriptionChange = this.handleDescriptionChange.bind(this);
+    this.handleStartChange = this.handleStartChange.bind(this);
+    this.handleDueChange = this.handleDueChange.bind(this);
+    this.handleSaveEdit = this.handleSaveEdit.bind(this);
   }
+  state = {
+    title: null,
+    description: null,
+    start: new Date(),
+    due: new Date(),
+    complete: null
+  };
+  handleTitleChange(e) {
+    this.setState({ title: e.target.value });
+  }
+
+  handleDescriptionChange(e) {
+    this.setState({ description: e.target.value });
+  }
+
+  handleStartChange(e) {
+    this.setState({ start: e.target.value });
+  }
+
+  handleDueChange(e) {
+    this.setState({ due: e.target.value });
+  }
+
+  handleSaveEdit() {
+    console.log("save", this.props.id);
+    this.props.updateTask(this.state, this.props.id);
+  }
+
   render() {
     return (
       <div>
@@ -58,7 +90,10 @@ class EntryDialog extends Component {
           <Button onClick={this.props.handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={this.props.handleClose} color="primary">
+          <Button
+            onClick={() => this.props.addTask(this.state)}
+            color="primary"
+          >
             Add
           </Button>
         </DialogActions>
