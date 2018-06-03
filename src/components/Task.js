@@ -31,7 +31,11 @@ const Task = (props) => {
       <Paper style={styles.paper} elevation={4}>
         <Grid container>
           <Grid item xs={1} style={styles.complete}>
-            <Checkbox checked={props.task.complete} color="primary"/>
+            <Checkbox 
+              checked={props.task.complete} 
+              color="primary"
+              onClick={() => props.completeTask(props.id)}
+            />
           </Grid>
           <Grid item xs={10}>
             <h3>{props.task.title}</h3>

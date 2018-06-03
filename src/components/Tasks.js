@@ -6,6 +6,10 @@ import Icon from "@material-ui/core/Icon";
 import Task from './Task';
 
 class Tasks extends Component {
+  constructor(props) {
+    super(props);
+    this.completeTask = this.completeTask.bind(this);
+  }
   state = {
     tasks: [
       {
@@ -45,6 +49,20 @@ class Tasks extends Component {
     }
   }
 
+  completeTask(index) {
+    let newTasks = this
+      .state
+      .tasks
+      .slice();
+    let task = this.state.tasks[index];
+    task.complete = !task.complete;
+    task.done = task.complete
+      ? new Date()
+      : null;
+    newTasks.splice(index, 1, task);
+    this.setState({tasks: newTasks});
+  }
+
   render() {
     return (
       <div>
@@ -63,9 +81,13 @@ class Tasks extends Component {
         {this
           .state
           .tasks
-          .map(task => (< Task task = {
-            task
-          } />))}
+          .map((task, index) => (< Task 
+          key = { index }
+          id = { index }
+          task = { task }
+          completeTask = { this.completeTask } 
+          />))
+        }
       </div>
     )
   }
