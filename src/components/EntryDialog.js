@@ -15,7 +15,45 @@ class EntryDialog extends Component {
     return (
       <div>
         <DialogTitle>Add Task</DialogTitle>
-        <DialogContent>Some Dialog Stuff</DialogContent>
+        <DialogContent>
+          <TextField
+            autoFocus
+            id="title"
+            label="Task Title"
+            type="text"
+            fullWidth
+            onChange={this.handleTitleChange}
+            defaultValue={this.state.title}
+          />
+          <TextField
+            id="description"
+            label="Task Description"
+            type="text"
+            fullWidth
+            onChange={this.handleDescriptionChange}
+            defaultValue={this.state.description}
+          />
+          <TextField
+            id="start"
+            label="Start Date"
+            type="date"
+            defaultValue={moment(this.state.start).format("YYYY-MM-DD")}
+            onChange={this.handleStartChange}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+          <TextField
+            id="due"
+            label="Due Date"
+            type="date"
+            defaultValue={moment(this.state.due).format("YYYY-MM-DD")}
+            onChange={this.handleDueChange}
+            InputLabelProps={{
+              shrink: true
+            }}
+          />
+        </DialogContent>
         <DialogActions>
           <Button onClick={this.props.handleClose} color="primary">
             Cancel

@@ -13,6 +13,7 @@ class Tasks extends Component {
     this.completeTask = this.completeTask.bind(this);
     this.addTask = this.addTask.bind(this);
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
+    this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
   state = {
     tasks: [
@@ -81,6 +82,10 @@ class Tasks extends Component {
     this.setState({ dialogOpen: true });
   }
 
+  handleCloseDialog() {
+    this.setState({ dialogOpen: false });
+  }
+
   render() {
     return (
       <div>
@@ -110,7 +115,7 @@ class Tasks extends Component {
           />
         ))}
         <Dialog open={this.state.dialogOpen} disableBackdropClick={true}>
-          <EntryDialog />
+          <EntryDialog handleClose={this.handleCloseDialog} />
         </Dialog>
       </div>
     );
