@@ -9,6 +9,7 @@ class Tasks extends Component {
   constructor(props) {
     super(props);
     this.completeTask = this.completeTask.bind(this);
+    this.addTask = this.addTask.bind(this);
   }
   state = {
     tasks: [
@@ -49,6 +50,18 @@ class Tasks extends Component {
     }
   }
 
+  addTask() {
+    const newTask = {
+      title: "New task",
+      description: "Description of new task",
+      start: new Date(),
+      due: new Date(),
+      done: null,
+      complete: false
+    };
+    this.setState({ tasks: [...this.state.tasks, newTask] });
+  }
+
   completeTask(index) {
     let newTasks = this
       .state
@@ -73,7 +86,7 @@ class Tasks extends Component {
             </Typography>
           </Grid>
           <Grid item xs={1} style={this.styles.fab}>
-            <Button variant="fab" mini color="primary">
+            <Button variant="fab" mini color="primary" onClick={this.addTask}>
               <Icon>add</Icon>
             </Button>
           </Grid>
