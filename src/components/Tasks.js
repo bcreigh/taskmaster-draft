@@ -12,6 +12,7 @@ class Tasks extends Component {
     super(props);
     this.completeTask = this.completeTask.bind(this);
     this.addTask = this.addTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
   }
@@ -79,6 +80,12 @@ class Tasks extends Component {
     this.setState({ tasks: newTasks });
   }
 
+  deleteTask(index) {
+    let newTasks = this.state.tasks.slice();
+    newTasks.splice(index, 1);
+    this.setState({ tasks: newTasks });
+  }
+
   handleOpenDialog() {
     this.setState({ dialogOpen: true });
   }
@@ -113,6 +120,7 @@ class Tasks extends Component {
             id={index}
             task={task}
             completeTask={this.completeTask}
+            deleteTask={this.deleteTask}
           />
         ))}
         <Dialog open={this.state.dialogOpen} disableBackdropClick={true}>
