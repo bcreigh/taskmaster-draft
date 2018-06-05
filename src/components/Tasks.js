@@ -16,6 +16,7 @@ class Tasks extends Component {
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
     this.editTask = this.editTask.bind(this);
+    this.updateTask = this.updateTask.bind(this);
   }
   state = {
     tasks: [
@@ -84,6 +85,13 @@ class Tasks extends Component {
     });
   }
 
+  updateTask(task, index) {
+    let newTasks = this.state.tasks.slice();
+    newTasks.splice(index, 1, task);
+    this.setState({ tasks: newTasks });
+    this.handleCloseDialog();
+  }
+
   completeTask(index) {
     let newTasks = this.state.tasks.slice();
     let task = this.state.tasks[index];
@@ -104,7 +112,12 @@ class Tasks extends Component {
   }
 
   handleCloseDialog() {
-    this.setState({ dialogOpen: false });
+    this.setState({
+      edit: false,
+      editTask: null,
+      editIndex: null,
+      dialogOpen: false
+    });
   }
 
   render() {
@@ -141,6 +154,7 @@ class Tasks extends Component {
           <EntryDialog
             handleClose={this.handleCloseDialog}
             addTask={this.addTask}
+            updateTask={this.updateTask}
             edit={this.state.edit}
             task={this.state.editTask}
             id={this.state.editIndex}

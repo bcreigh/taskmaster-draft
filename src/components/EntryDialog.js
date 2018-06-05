@@ -53,7 +53,7 @@ class EntryDialog extends Component {
   render() {
     return (
       <div>
-        <DialogTitle>Add Task</DialogTitle>
+        <DialogTitle>{this.props.edit ? "Edit Task" : "Add Task"}</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -94,15 +94,24 @@ class EntryDialog extends Component {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={this.props.handleClose} color="primary">
-            Cancel
-          </Button>
           <Button
-            onClick={() => this.props.addTask(this.state)}
+            onClick={() => this.props.updateTask(this.state, this.props.id)}
             color="primary"
           >
-            Add
+            Cancel
           </Button>
+          {this.props.edit ? (
+            <Button onClick={this.handleSaveEdit} color="primary">
+              Save
+            </Button>
+          ) : (
+            <Button
+              onClick={() => this.props.addTask(this.state)}
+              color="primary"
+            >
+              Add
+            </Button>
+          )}
         </DialogActions>
       </div>
     );
