@@ -15,6 +15,7 @@ class Tasks extends Component {
     this.deleteTask = this.deleteTask.bind(this);
     this.handleOpenDialog = this.handleOpenDialog.bind(this);
     this.handleCloseDialog = this.handleCloseDialog.bind(this);
+    this.editTask = this.editTask.bind(this);
   }
   state = {
     tasks: [
@@ -43,7 +44,10 @@ class Tasks extends Component {
         complete: false
       }
     ],
-    dialogOpen: false
+    dialogOpen: false,
+    edit: false,
+    editTask: null,
+    editIndex: null
   };
 
   styles = {
@@ -69,6 +73,15 @@ class Tasks extends Component {
     };
     this.setState({ tasks: [...this.state.tasks, newTask] });
     this.handleCloseDialog();
+  }
+
+  editTask(task, index) {
+    this.setState({
+      edit: true,
+      editTask: task,
+      editIndex: index,
+      dialogOpen: true
+    });
   }
 
   completeTask(index) {
@@ -121,12 +134,16 @@ class Tasks extends Component {
             task={task}
             completeTask={this.completeTask}
             deleteTask={this.deleteTask}
+            editTask={this.editTask}
           />
         ))}
         <Dialog open={this.state.dialogOpen} disableBackdropClick={true}>
           <EntryDialog
             handleClose={this.handleCloseDialog}
             addTask={this.addTask}
+            edit={this.state.edit}
+            task={this.state.editTask}
+            id={this.state.editIndex}
           />
         </Dialog>
       </div>

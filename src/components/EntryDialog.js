@@ -22,6 +22,13 @@ class EntryDialog extends Component {
     due: new Date(),
     complete: null
   };
+
+  componentWillMount() {
+    if (this.props.edit) {
+      this.setState(this.props.task);
+    }
+  }
+
   handleTitleChange(e) {
     this.setState({ title: e.target.value });
   }

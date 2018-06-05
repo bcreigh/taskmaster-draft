@@ -43,7 +43,7 @@ const Task = props => {
             <h3>{props.task.title}</h3>
           </Grid>
           <Grid item xs={1}>
-            <IconButton>
+            <IconButton onClick={() => props.editTask(props.task, props.id)}>
               <Icon>edit</Icon>
             </IconButton>
             <IconButton onClick={() => props.deleteTask(props.id)}>
